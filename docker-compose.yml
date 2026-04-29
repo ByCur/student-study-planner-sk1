@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: tasknotes-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tasknotes
+      POSTGRES_USER: tasknotes
+      POSTGRES_PASSWORD: tasknotes_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: tasknotes-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://tasknotes:tasknotes_password@db:5432/tasknotes
+      CORS_ORIGIN: http://localhost:5173,http://localhost:8080
+      NODE_ENV: development
+      PORT: 10000
+    ports:
+      - "10000:10000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: tasknotes-frontend
+    restart: unless-stopped
+    environment:
+      VITE_API_URL: http://localhost:10000
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

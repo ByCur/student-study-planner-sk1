@@ -1,0 +1,111 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #eef3ff;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, textarea, select { font: inherit; }
+
+.page { min-height: 100vh; padding: 28px; }
+.hero {
+  display: grid;
+  grid-template-columns: 1.7fr .8fr;
+  gap: 28px;
+  align-items: center;
+  padding: 46px;
+  border-radius: 32px;
+  color: white;
+  background: linear-gradient(135deg, #182848 0%, #3f51d7 58%, #7b61ff 100%);
+  box-shadow: 0 24px 60px rgba(35, 50, 100, .28);
+}
+.badge {
+  display: inline-flex;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.35);
+  font-weight: 700;
+}
+h1 { font-size: clamp(42px, 7vw, 82px); line-height: .95; margin: 30px 0 20px; }
+.hero p { max-width: 850px; font-size: 21px; line-height: 1.6; margin: 0; }
+.heroCard {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.28);
+  backdrop-filter: blur(8px);
+}
+.heroCard strong { font-size: 22px; }
+.heroCard span { opacity: .92; }
+
+.stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 28px 0; }
+.stats article {
+  padding: 22px;
+  border-radius: 24px;
+  background: white;
+  box-shadow: 0 16px 35px rgba(25, 44, 90, .10);
+}
+.stats span { display: block; color: #64708a; font-weight: 700; }
+.stats strong { display: block; margin-top: 8px; font-size: 38px; }
+.stats .danger strong { color: #c82424; }
+
+.panel, .task, .empty {
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(113, 130, 180, .25);
+  box-shadow: 0 18px 45px rgba(25, 44, 90, .10);
+  border-radius: 28px;
+}
+.panel { padding: 28px; }
+.panelHeader { display: flex; justify-content: space-between; gap: 18px; align-items: start; margin-bottom: 20px; }
+.panel h2 { margin: 0; font-size: 30px; }
+.panel p { margin: 6px 0 0; color: #6b7488; }
+.status { padding: 10px 14px; border-radius: 999px; font-weight: 800; font-size: 14px; }
+.status.ok { background: #e6f8ee; color: #137340; }
+.status.error { background: #ffe2e2; color: #a31212; }
+
+.taskForm { display: grid; grid-template-columns: 1.2fr .8fr .7fr .7fr .7fr auto; gap: 14px; }
+.taskForm textarea { grid-column: 1 / 4; min-height: 80px; resize: vertical; }
+.taskForm input, .taskForm textarea, .taskForm select {
+  width: 100%; border: 1px solid #cfd8ee; border-radius: 18px; padding: 16px 18px; background: white; color: #192136;
+}
+.taskForm button, .actions button, .toolbar button {
+  border: 0; border-radius: 18px; padding: 15px 20px; font-weight: 800; cursor: pointer;
+  background: #473bd1; color: white;
+}
+.taskForm button { min-width: 130px; }
+
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 18px; }
+.toolbar button { background: white; color: #39445e; border: 1px solid #d4dcef; text-transform: capitalize; }
+.toolbar button.active { background: #182848; color: white; }
+.taskList { display: grid; gap: 16px; }
+.task { padding: 24px; border-left: 9px solid #6b78ff; }
+.task.priority-high { border-left-color: #e43f5a; }
+.task.priority-normal { border-left-color: #6b78ff; }
+.task.priority-low { border-left-color: #22a06b; }
+.task.done { opacity: .72; }
+.task.done h3 { text-decoration: line-through; }
+.taskTop { display: flex; justify-content: space-between; gap: 18px; }
+.task h3 { font-size: 24px; margin: 0 0 8px; }
+.task p { margin: 0; color: #596579; line-height: 1.5; }
+.pill { align-self: start; padding: 8px 12px; border-radius: 999px; font-weight: 900; text-transform: uppercase; font-size: 12px; }
+.pill.high { color: #a8122a; background: #ffe1e7; }
+.pill.normal { color: #27259a; background: #e7e8ff; }
+.pill.low { color: #0c6b42; background: #ddf7e9; }
+.meta { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; color: #5f6b80; }
+.overdue { color: #c82424 !important; }
+.actions { display: flex; gap: 12px; }
+.actions button { background: #23345f; }
+.actions .delete { background: #f1f3f9; color: #b51f30; }
+.empty { padding: 34px; text-align: center; color: #64708a; font-weight: 700; }
+
+@media (max-width: 950px) {
+  .hero { grid-template-columns: 1fr; padding: 30px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .taskForm { grid-template-columns: 1fr; }
+  .taskForm textarea { grid-column: auto; }
+  .panelHeader { flex-direction: column; }
+}
