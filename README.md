@@ -183,6 +183,29 @@ Cloud logs:
 - Docker is installed.
 - The local containers were created with Docker Compose.
 
+## Cloud deployment script
+`/deploy-cloud.sh`
+
+The public cloud deployment is defined with `render.yaml`.
+
+The application is deployed on Render as:
+
+- Frontend web service
+- Backend web service
+- PostgreSQL database
+
+Public application:
+
+https://tasknotes-frontend.onrender.com
+
+## To trigger a cloud redeploy from the command line, use:
+
+export RENDER_BACKEND_DEPLOY_HOOK="your_backend_deploy_hook_url"
+export RENDER_FRONTEND_DEPLOY_HOOK="your_frontend_deploy_hook_url"
+
+chmod +x deploy-cloud.sh
+./deploy-cloud.sh
+
 ## 12. Cost analysis for one year
 
 Assumption:
