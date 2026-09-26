@@ -10,8 +10,26 @@ on:
       - main
 
 jobs:
-  build-and-check:
+  build-and-test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+
+        env:
+          POSTGRES_DB: tasknotes_test
+          POSTGRES_USER: tasknotes
+          POSTGRES_PASSWORD: tasknotes_password
+
+        ports:
+          - 5432:5432
+
+        options: >-
+          --health-cmd "pg_isready -U tasknotes -d tasknotes_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout repository
@@ -20,7 +38,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+
+      # -----------------------------
+      # Backend
+      # -----------------------------
 
       - name: Install backend dependencies
         working-directory: backend
@@ -28,7 +50,21 @@ jobs:
 
       - name: Check backend syntax
         working-directory: backend
-        run: node --check src/server.js
+        run: |
+          node --check src/app.js
+          node --check src/server.js
+
+      - name: Run backend tests
+        working-directory: backend
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgres://tasknotes:tasknotes_password@localhost:5432/tasknotes_test
+          CORS_ORIGIN: "*"
+        run: npm test
+
+      # -----------------------------
+      # Frontend
+      # -----------------------------
 
       - name: Install frontend dependencies
         working-directory: frontend
@@ -37,6 +73,10 @@ jobs:
       - name: Build frontend
         working-directory: frontend
         run: npm run build
+
+      # -----------------------------
+      # Docker
+      # -----------------------------
 
       - name: Validate Docker Compose
         run: docker compose config
