@@ -4,6 +4,8 @@ A full-stack web application designed to help university students organize their
 
 This project was developed as part of my Computer Engineering studies and allowed me to work with a complete web development stack, including frontend development, backend APIs, databases and containerization.
 
+[![CI](https://github.com/ByCur/student-study-planner-sk1/actions/workflows/ci.yml/badge.svg)](https://github.com/ByCur/student-study-planner-sk1/actions/workflows/ci.yml)
+
 ---
 
 ## 🚀 Features
