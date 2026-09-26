@@ -60,7 +60,7 @@ jobs:
           NODE_ENV: test
           DATABASE_URL: postgres://tasknotes:tasknotes_password@localhost:5432/tasknotes_test
           CORS_ORIGIN: "*"
-        run: npm test
+        run: npm test test:coverage
 
       # -----------------------------
       # Frontend

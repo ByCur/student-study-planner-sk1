@@ -3,7 +3,18 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node src/server.js",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "test:coverage": "jest --runInBand --coverage"
+  },
+  "jest": {
+  "coverageThreshold": {
+    "global": {
+      "branches": 75,
+      "functions": 90,
+      "lines": 80,
+      "statements": 80
+    }
+  }
   },
   "dependencies": {
     "cors": "^2.8.5",

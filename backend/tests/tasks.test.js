@@ -1,6 +1,10 @@
 process.env.NODE_ENV = 'test';
 process.env.CORS_ORIGIN = '*';
 
+process.env.DATABASE_URL =
+  process.env.DATABASE_URL ||
+  'postgres://tasknotes:tasknotes_password@localhost:5432/tasknotes_test';
+
 const request = require('supertest');
 const { app, pool, initDb } = require('../src/app');
 
@@ -101,4 +105,28 @@ describe('Student Study Planner API', () => {
 
     expect(tasks.body).toHaveLength(0);
   });
+
+  test('GET unknown route returns 404', async () => {
+  const response = await request(app).get('/api/unknown');
+
+  expect(response.statusCode).toBe(404);
+  expect(response.body.message).toBe('Route not found');
+  });
+
+  test('PATCH nonexistent task returns 404', async () => {
+  const response = await request(app)
+    .patch('/api/tasks/999999/toggle');
+
+  expect(response.statusCode).toBe(404);
+  expect(response.body.message).toBe('Task not found');
+  });
+
+  test('DELETE nonexistent task returns 404', async () => {
+  const response = await request(app)
+    .delete('/api/tasks/999999');
+
+  expect(response.statusCode).toBe(404);
+  expect(response.body.message).toBe('Task not found');
+  });
+
 });

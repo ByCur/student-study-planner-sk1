@@ -4,3 +4,4 @@ node_modules
 !.env.example
 backups/
 .DS_Store
+backend/coverage/
