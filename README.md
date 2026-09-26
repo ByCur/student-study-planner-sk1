@@ -73,6 +73,20 @@ PostgreSQL is used for persistent data storage.
 
 ---
 
+## 📸 Screenshots
+
+### Dashboard
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Task Management
+
+![Task Management](docs/screenshots/task-management.png)
+
+### Completed Tasks
+
+![Completed Tasks](docs/screenshots/completed-task.png)
+
 ## 📂 Project Structure
 
 ```text
@@ -90,6 +104,8 @@ student-study-planner
 ```
 
 > The exact project structure may vary depending on the current version of the repository.
+
+
 
 ---
 
