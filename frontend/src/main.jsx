@@ -51,12 +51,12 @@ function App() {
   const [status, setStatus] = useState('Loading...');
   const [filter, setFilter] = useState('all');
   const [form, setForm] = useState({
-    title: '',
-    description: '',
-    subject: '',
-    task_type: 'assignment',
-    priority: 'normal',
-    deadline: '',
+    title: '', 
+    description: '', 
+    subject: '', 
+    taskType: 'assignment', 
+    priority: 'normal', 
+    deadline: '', 
   });
 
   async function loadTasks() {
@@ -81,7 +81,13 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
-    setForm({ title: '', description: '', subject: '', task_type: 'assignment', priority: 'normal', deadline: '' });
+    setForm({  
+      title: '',
+      description: '',
+      subject: '',
+      taskType: 'assignment',
+      priority: 'normal',
+      deadline: '' });
     loadTasks();
   }
 
@@ -152,7 +158,7 @@ function App() {
           <input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Task title, e.g. Prepare Kubernetes defense" />
           <input value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} placeholder="Subject, e.g. Cloud Technologies" />
           <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Details or study notes" />
-          <select value={form.task_type} onChange={e => setForm({ ...form, task_type: e.target.value })}>
+          <select  value={form.taskType} onChange={e => setForm({ ...form, taskType: e.target.value })}>
             <option value="assignment">Assignment</option>
             <option value="exam">Exam</option>
             <option value="project">Project</option>
@@ -189,7 +195,7 @@ function App() {
             </div>
             <div className="meta">
               <span>Subject: <b>{task.subject || 'General'}</b></span>
-              <span>Type: <b>{task.task_type}</b></span>
+              <span>Type: <b>{task.taskType}</b></span>
               <span className={isOverdue(task) ? 'overdue' : ''}>Deadline: <b>{formatDate(task.deadline)}</b></span>
             </div>
             <div className="actions">
