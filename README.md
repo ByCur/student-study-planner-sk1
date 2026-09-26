@@ -8,7 +8,7 @@ Built with **React, Node.js, Express, PostgreSQL and Docker**, with automated in
 
 ## 🌐 Live Demo
 
-👉 **[Open Student Study Planner](TU_URL_FRONTEND)**
+👉 **[Open Student Study Planner](https://tasknotes-frontend.onrender.com))**
 
 > The application is hosted on Render's free tier, so the first request may take a few seconds if the service has been inactive.
 
