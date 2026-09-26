@@ -4,16 +4,46 @@ import './styles.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
 
+function parseDeadline(date) {
+  if (!date) return null;
+
+  // PostgreSQL may return either YYYY-MM-DD
+  // or a complete ISO timestamp.
+  const datePart = String(date).split('T')[0];
+  const parsedDate = new Date(`${datePart}T00:00:00`);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return null;
+  }
+
+  return parsedDate;
+}
+
 function formatDate(date) {
-  if (!date) return 'No deadline';
-  return new Date(date + 'T00:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  const parsedDate = parseDeadline(date);
+
+  if (!parsedDate) {
+    return 'No deadline';
+  }
+
+  return parsedDate.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
 }
 
 function isOverdue(task) {
-  if (!task.deadline || task.completed) return false;
+  if (task.completed) return false;
+
+  const deadline = parseDeadline(task.deadline);
+
+  if (!deadline) return false;
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  return new Date(task.deadline + 'T00:00:00') < today;
+
+  return deadline < today;
 }
 
 function App() {
@@ -86,7 +116,7 @@ function App() {
     <main className="page">
       <section className="hero">
         <div>
-          <span className="badge">Final cloud exam project</span>
+          <span className="badge">Full-Stack Cloud Application</span>
           <h1>Student Study Planner</h1>
           <p>
             Manage assignments, exams, projects and study deadlines. Data is stored in PostgreSQL,
