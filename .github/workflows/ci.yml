@@ -54,13 +54,13 @@ jobs:
           node --check src/app.js
           node --check src/server.js
 
-      - name: Run backend tests
+      - name: Run backend tests with coverage
         working-directory: backend
         env:
           NODE_ENV: test
           DATABASE_URL: postgres://tasknotes:tasknotes_password@localhost:5432/tasknotes_test
           CORS_ORIGIN: "*"
-        run: npm test test:coverage
+        run: npm run test:coverage
 
       # -----------------------------
       # Frontend
